@@ -2,54 +2,42 @@ import { useState } from "react";
 
 function App() {
   const apiPost = "https://67c5b4f3351c081993fb1ab6.mockapi.io/api/posts";
-  /**
-   const [name, setName] = useState("");
+
+  //const [name, setName] = useState("");
+
   const [formData, setFormData] = useState({
     title: "",
-        author: name,
-        body: "",
-        public: true,
-        id: ""
-  })
+    author: "",
+    body: "",
+    public: true,
+    id: "",
+  });
 
-
-  function handleName(e) {
-    setName(e.target.value);
+  function handleFormData(e) {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
     console.log(e.target.value);
   }
- 
-  
-  function handleFromData(e) { 
-    const fTitle = e.target.title;
-    const fAuthor = e.target.author;
-    const fbody = e.target.body;
-    const fpubblic = e.target.pubblic
-    const newData = formData;
-    const newData[fieldName] = fieldValue;
 
-
-    setFormData(newData);
-  }
-
-  //per inviare 
+  //per inviare
   function handleSubmit(e) {
     e.preventDefault();
-
-    fetch(apiPost, {
+    const url = "https://67c5b4f3351c081993fb1ab6.mockapi.io/api/posts";
+    fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData)
-    })
-      .then((response) => {
-        console.log(response.status);
-      })
+      body: JSON.stringify(formData),
+    });
 
+    fetch(url)
+      .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setName("");
       });
   }
-*/
+
   return (
     <>
       <div className="container">
@@ -63,6 +51,8 @@ function App() {
             name="title"
             aria-describedby="helpId"
             placeholder="nome titolo"
+            value={formData.title}
+            onChange={handleFormData}
           />
         </div>
         <input
@@ -72,6 +62,8 @@ function App() {
           id="author"
           aria-describedby="helpId"
           placeholder="nome autore"
+          value={formData.author}
+          onChange={handleFormData}
         />
 
         <div className="mb-3">
@@ -81,8 +73,10 @@ function App() {
           <textarea
             className="form-control"
             id="exampleFormControlTextarea1"
-            rows={3}
+            rows={2}
             defaultValue={""}
+            value={formData.body}
+            onChange={handleFormData}
           />
         </div>
 
