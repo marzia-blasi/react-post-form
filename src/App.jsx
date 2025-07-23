@@ -74,7 +74,6 @@ function App() {
             className="form-control"
             id="exampleFormControlTextarea1"
             rows={2}
-            defaultValue={""}
             value={formData.body}
             onChange={handleFormData}
           />
@@ -83,13 +82,12 @@ function App() {
         <div className="form-check">
           <input
             className="form-check-input"
-            type="radio"
-            name="radioDefault"
-            id="radioDefault1"
+            type="checkbox"
+            name="public"
+            id="publicCheck"
+            checked={formData.public}
+            onChange={handleFormData}
           />
-          <label className="form-check-label" htmlFor="radioDefault1">
-            pubblico
-          </label>
         </div>
 
         <div>
